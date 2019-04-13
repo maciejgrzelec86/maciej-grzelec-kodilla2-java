@@ -1,6 +1,8 @@
-pluginManagement {
+gradlepluginManagement {
     repositories {
         gradlePluginPortal()
     }
 }
 rootProject.name = 'kodilla-course'
+include 'kodilla-testing'
+
