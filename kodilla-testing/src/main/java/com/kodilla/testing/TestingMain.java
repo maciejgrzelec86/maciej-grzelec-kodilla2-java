@@ -8,10 +8,11 @@ public class TestingMain {
 
         String result;
         int result2, result3;
+        String name = "Adam";
 
-        SimpleUser simpleUser = new SimpleUser("Adam");
+        SimpleUser simpleUser = new SimpleUser("Adam", "xx");
 
-        result = simpleUser.getUserName();
+        result = simpleUser.getUsername();
 
         if (result.equals("Adam")) {
             System.out.println("Test OK");

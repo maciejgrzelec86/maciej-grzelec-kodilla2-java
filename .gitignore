@@ -29,6 +29,8 @@ HELP.md
 ### VS Code ###
 .vscode/
 
+
+#w katalogach glownych i w katalogachout i build pozostalych modulow
 **/out/
 **/build/
 

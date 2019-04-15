@@ -7,9 +7,9 @@ public class ForumTestSuite {
     @Test
     public void testCaseUsername(){
         //Given
-        SimpleUser simpleUser = new SimpleUser("theForumUser");
+        SimpleUser simpleUser = new SimpleUser("theForumUser", "xxx");
         //When
-        String result = simpleUser.getUserName();
+        String result = simpleUser.getUsername();
         //Then
         Assert.assertEquals("theForumUser", result);
     }
