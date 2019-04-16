@@ -46,4 +46,5 @@ public class CollectionTestSuite {
         //Then
         Assert.assertTrue(numbersNoOdds.size() == 2);
     }
+
 }
