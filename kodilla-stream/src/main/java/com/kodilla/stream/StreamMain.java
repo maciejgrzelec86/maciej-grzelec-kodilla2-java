@@ -9,6 +9,7 @@ import com.kodilla.stream.reference.FunctionalCalculator;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -46,9 +47,7 @@ public class StreamMain {
 
         Map <Integer, ForumUser> resultMap = forum.getUserList().stream()
                 .filter(s -> s.getSex() =='M')
-                .filter(s -> s.getDateOfBirth().isBefore(LocalDate.of(1999,4,24)))
-                //jak moge zrobic dynamiczne odwolanie do aktualnej daty? probowalem LocalDateTime.now(),
-                // ale nie moge uzyc odejmowania
+                .filter(s -> Period.between(s.getDateOfBirth(), LocalDate.now()).getYears()>20)
                 .filter(s -> s.getQuantityOfPosts() >= 1)
                 .collect(Collectors.toMap(ForumUser::getUserId, forumUser -> forumUser));
 
