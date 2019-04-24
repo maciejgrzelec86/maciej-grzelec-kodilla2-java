@@ -54,6 +54,8 @@ public final class ForumUser {
                 ", quantityOfPosts=" + quantityOfPosts +
                 '}';
     }
+
+
 }
 
 

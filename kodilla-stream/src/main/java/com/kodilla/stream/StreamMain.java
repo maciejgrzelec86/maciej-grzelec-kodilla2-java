@@ -6,7 +6,11 @@ import com.kodilla.stream.forumuser.ForumUser;
 import com.kodilla.stream.lambda.ExpressionExecutor;
 import com.kodilla.stream.lambda.MathExpression;
 import com.kodilla.stream.reference.FunctionalCalculator;
+import com.kodilla.stream.world.Continent;
+import com.kodilla.stream.world.Country;
+import com.kodilla.stream.world.World;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -43,7 +47,7 @@ public class StreamMain {
         //poemBeautifier.beautify("Ala ma kota 3", s -> s.replaceFirst("3", "#3"));
         //poemBeautifier.beautify("Ala ma kota 4t", s -> s.replaceAll("t", "T"));
 
-        Forum forum = new Forum();
+        /*Forum forum = new Forum();
 
         Map <Integer, ForumUser> resultMap = forum.getUserList().stream()
                 .filter(s -> s.getSex() =='M')
@@ -53,6 +57,7 @@ public class StreamMain {
 
         resultMap.entrySet().stream()
                 .map(s -> s.getKey() + "; " + s.getValue())
-                .forEach(System.out::println);
+                .forEach(System.out::println);*/
+
     }
 }
