@@ -128,7 +128,9 @@ public class BoardTestSuite {
         List<TaskList> tasksInProgress = new ArrayList<>();
         tasksInProgress.add(new TaskList("In progress"));
         System.out.println(tasksInProgress);
-        Integer numberOfDaysInProgress = project.getTaskLists().stream()
+
+
+        double numberOfDaysInProgress = project.getTaskLists().stream()
                 .filter(tasksInProgress::contains)
                 .flatMap(s -> s.getTasks().stream())
                 .mapToInt(n -> (int) ChronoUnit.DAYS.between(n.getCreated(),LocalDate.now()))
@@ -138,10 +140,18 @@ public class BoardTestSuite {
                 .filter(tasksInProgress::contains)
                 .flatMap(s -> s.getTasks().stream())
                 .count();
+
+        double numberOfDaysInProgress2 = project.getTaskLists().stream()
+                .filter(tasksInProgress::contains)
+                .flatMap(s -> s.getTasks().stream())
+                .mapToInt(n -> (int) ChronoUnit.DAYS.between(n.getCreated(),LocalDate.now()))
+                .average().getAsDouble();
+
         System.out.println(numberOfDaysInProgress);
         System.out.println(countOfTasksInProgress);
         //Then
         Assert.assertEquals(10,numberOfDaysInProgress/countOfTasksInProgress, 0);
+        Assert.assertEquals(10,numberOfDaysInProgress2, 0);
 
 
 
