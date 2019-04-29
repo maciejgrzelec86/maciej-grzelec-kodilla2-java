@@ -2,7 +2,7 @@ package com.kodilla.testing.forum;
 
 import org.junit.*;
 
-public class ForumTestSuite {
+/*public class ForumTestSuite {
     private static int testCounter = 0;
 
     @BeforeClass
@@ -148,4 +148,4 @@ public class ForumTestSuite {
     }
 }
 
-
+*/
