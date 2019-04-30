@@ -16,4 +16,10 @@ public class FunctionalCalculator {
     public static double divideAByB(double a, double b) {
         return a / b;
     }
+
+    public static class Aaa {
+    }
+
+    public static class Bbbb {
+    }
 }
