@@ -21,7 +21,7 @@ public class ExceptionHandling {
 
         }*/
 
-        Flight flight1 = new Flight(null,"Berlin");
+        Flight flight1 = new Flight("Warsaw","Berlin");
         FlightCoordinates flightCoordinates = new FlightCoordinates();
 
         try {
@@ -30,11 +30,11 @@ public class ExceptionHandling {
 
         } catch (RouteNotFoundException e) {
 
-            System.out.println("No such destination");
+            System.out.println("No such destination ");
 
         } finally {
 
-            System.out.println("Program finished, flight");
+            System.out.println("Program finished");
         }
     }
 }
