@@ -1,10 +1,12 @@
 package com.kodilla.exception.test;
 
+import java.io.IOException;
+
 public class ExceptionHandling {
 
     public static void main(String[] args) {
 
-        try  {
+        /*try  {
 
             SecondChallenge secondChallenge = new SecondChallenge();
             secondChallenge.probablyIWillTrowException(10,2);
@@ -17,6 +19,22 @@ public class ExceptionHandling {
 
           System.out.println("Last words");
 
+        }*/
+
+        Flight flight1 = new Flight(null,"Berlin");
+        FlightCoordinates flightCoordinates = new FlightCoordinates();
+
+        try {
+
+            flightCoordinates.findFilght(flight1);
+
+        } catch (RouteNotFoundException e) {
+
+            System.out.println("No such destination");
+
+        } finally {
+
+            System.out.println("Program finished, flight");
         }
     }
 }
