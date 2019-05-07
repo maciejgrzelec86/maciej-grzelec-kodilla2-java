@@ -1,7 +1,10 @@
 package com.kodilla.testing.forum;
 
+import com.kodilla.testing.forum.statistics.Statistics;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class ForumUser {
     private String name;
@@ -53,4 +56,5 @@ public class ForumUser {
     public String getRealName() {
         return realName;
     }
+
 }
