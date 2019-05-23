@@ -33,7 +33,7 @@ public class Board {
         Figure figureWhite = new Figure(FigureColour.WHITE);
         Figure figureBlack = new Figure(FigureColour.BLACK);
 
-        //grid.getChildren().clear(); w taki sposób?
+        grid.getChildren().clear();
 
         for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 8; y++){
