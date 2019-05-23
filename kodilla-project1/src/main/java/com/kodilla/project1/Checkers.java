@@ -7,11 +7,9 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import javax.swing.text.html.ImageView;
-
 public class Checkers extends Application {
 
-    public static final int BOARD_SIZE = 600;
+    public static final int BOARD_SIZE = 600; // czemu juz przy 900 powieksza image?
     private final Image imageback = new Image("file:kodilla-project1/src/main/resources/checkers_board.jpg");
     private Board board;
 

@@ -7,9 +7,7 @@ public class Queen extends Figure {
         super(colour);
     }
 
-
     //do podmiany image pawn na queen jeszcze
-
     @Override
     public Image getImage() {
         if (getColour() == FigureColour.WHITE) {

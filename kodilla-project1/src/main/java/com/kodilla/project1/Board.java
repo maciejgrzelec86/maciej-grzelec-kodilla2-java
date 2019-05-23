@@ -1,7 +1,7 @@
 package com.kodilla.project1;
+import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import java.awt.*;
 import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,7 @@ public class Board {
 
     private final List<BoardRow> rows = new ArrayList<>();
     private final GridPane grid;
+    //private final Group pawnGroup = new Group();
 
     public Board(GridPane grid) {
         this.grid = grid;
@@ -34,11 +35,11 @@ public class Board {
 
         //grid.getChildren().clear(); w taki sposób?
 
-        for (int x = 0; x < 2; x++) {
-            for (int y = 0; y < 2; y++){
+        for (int x = 0; x < 8; x++) {
+            for (int y = 0; y < 8; y++){
                 if (getFigure(x, y).getColour() == FigureColour.WHITE) {
                     ImageView imageWhite = new ImageView(figureWhite.getImage());
-                    grid.add(imageWhite, x, y);
+                    grid.add(imageWhite, x, y); // add po getChildren() moze miec tylko jeden indeks?
                 } else if (getFigure(x, y).getColour() == FigureColour.BLACK){
                     ImageView imageBlack = new ImageView(figureBlack.getImage());
                     grid.add(imageBlack, x, y);
@@ -81,6 +82,7 @@ public class Board {
         setFigure(2, 2, new Pawn(FigureColour.BLACK));
         setFigure(4, 2, new Pawn(FigureColour.BLACK));
         setFigure(6, 2, new Pawn(FigureColour.BLACK));
+
         setFigure(1, 5, new Pawn(FigureColour.WHITE));
         setFigure(3, 5, new Pawn(FigureColour.WHITE));
         setFigure(5, 5, new Pawn(FigureColour.WHITE));
