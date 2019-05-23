@@ -34,8 +34,8 @@ public class Board {
 
         //grid.getChildren().clear(); w taki sposób?
 
-        for (int x = 0; x < 8; x++) {
-            for (int y = 0; y < 8; y++){
+        for (int x = 0; x < 2; x++) {
+            for (int y = 0; y < 2; y++){
                 if (getFigure(x, y).getColour() == FigureColour.WHITE) {
                     ImageView imageWhite = new ImageView(figureWhite.getImage());
                     grid.add(imageWhite, x, y);

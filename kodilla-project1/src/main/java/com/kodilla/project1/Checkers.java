@@ -42,10 +42,11 @@ public class Checkers extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        System.out.println(board.getFigure(7,7));
+        //System.out.println(board.getFigure(7,7));
         System.out.println(grid.getChildren());
-        System.out.println(grid.getScene());
-        grid.setVisible(true);
+        //System.out.println(grid.getScene());
+        //grid.setVisible(true);
+
     }
 }
 
