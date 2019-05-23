@@ -1,32 +1,102 @@
 package com.kodilla.project1;
-
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import java.awt.*;
+import javafx.scene.image.Image;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Board {
 
-    public static final int BOARD_SIZE = 500;
+    private final List<BoardRow> rows = new ArrayList<>();
+    private final GridPane grid;
 
-    private Image imageback = new Image("file:resources/checkers board.jpg");
+    public Board(GridPane grid) {
+        this.grid = grid;
+        for (int x =0; x < 8; x++) {
+            rows.add(new BoardRow());
+        }
+    }
+    //720x720
+    public Figure getFigure(int col, int row){
+        return rows.get(row).getCols().get(col);
+    }
 
-    BackgroundSize backgroundSize = new BackgroundSize(100, 100, true,
-            true, true, false);
+    public void setFigure(int col, int row, Figure figure) {
+        rows.get(row).getCols().add(col, figure);
+        rows.get(row).getCols().remove(col +1);
+    }
 
-    BackgroundImage backgroundImage = new BackgroundImage(imageback, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT,
-            BackgroundPosition.CENTER, backgroundSize);
+    public void showBoard() {
 
-    Background background = new Background(backgroundImage);
+        Figure figureWhite = new Figure(FigureColour.WHITE);
+        Figure figureBlack = new Figure(FigureColour.BLACK);
 
-    public Parent createBoard() {
-        GridPane layout = new GridPane();
-        layout.setBackground(background);
-        layout.setPrefSize(BOARD_SIZE, BOARD_SIZE);
-        return layout;
+        //grid.getChildren().clear(); w taki sposób?
+
+        for (int x = 0; x < 8; x++) {
+            for (int y = 0; y < 8; y++){
+                if (getFigure(x, y).getColour() == FigureColour.WHITE) {
+                    ImageView imageWhite = new ImageView(figureWhite.getImage());
+                    grid.add(imageWhite, x, y);
+                } else if (getFigure(x, y).getColour() == FigureColour.BLACK){
+                    ImageView imageBlack = new ImageView(figureBlack.getImage());
+                    grid.add(imageBlack, x, y);
+                } else {
+                    System.out.println("No figure in spot: " + x + ", " + y);
+                }
+            }
+        }
+        //w petli wyswietlic figury pobierane przez getFigure() na gridzie grid (na poczatku wyczyscic grida za kazdym razem)
+    }
+
+    public void initBoard() {
+
+        /*for (int x = 0; x < 8; x++) {
+            for (int y =0;y < 8; y++) {
+                setFigure(x, y, new Pawn(FigureColour.NONE ));
+            }
+        }*/
+
+        /*for (int x = 0; x < 8; x++) {
+            for (int y =0;y < 8; y++) {
+                if(y<=2 && x + y % 2 ==0) {
+                    setFigure(x, y, new Pawn(FigureColour.WHITE));
+                }
+                if(y>4 && x + y % 2 ==0) {
+                    setFigure(x, y, new Pawn(FigureColour.BLACK));
+                }
+            }
+        }*/
+
+        setFigure(0, 0, new Pawn(FigureColour.BLACK));
+        setFigure(2, 0, new Pawn(FigureColour.BLACK));
+        setFigure(4, 0, new Pawn(FigureColour.BLACK));
+        setFigure(6, 0, new Pawn(FigureColour.BLACK));
+        setFigure(1, 1, new Pawn(FigureColour.BLACK));
+        setFigure(3, 1, new Pawn(FigureColour.BLACK));
+        setFigure(5, 1, new Pawn(FigureColour.BLACK));
+        setFigure(7, 1, new Pawn(FigureColour.BLACK));
+        setFigure(0, 2, new Pawn(FigureColour.BLACK));
+        setFigure(2, 2, new Pawn(FigureColour.BLACK));
+        setFigure(4, 2, new Pawn(FigureColour.BLACK));
+        setFigure(6, 2, new Pawn(FigureColour.BLACK));
+        setFigure(1, 5, new Pawn(FigureColour.WHITE));
+        setFigure(3, 5, new Pawn(FigureColour.WHITE));
+        setFigure(5, 5, new Pawn(FigureColour.WHITE));
+        setFigure(7, 5, new Pawn(FigureColour.WHITE));
+        setFigure(0, 6, new Pawn(FigureColour.WHITE));
+        setFigure(2, 6, new Pawn(FigureColour.WHITE));
+        setFigure(4, 6, new Pawn(FigureColour.WHITE));
+        setFigure(6, 6, new Pawn(FigureColour.WHITE));
+        setFigure(1, 7, new Pawn(FigureColour.WHITE));
+        setFigure(3, 7, new Pawn(FigureColour.WHITE));
+        setFigure(5, 7, new Pawn(FigureColour.WHITE));
+        setFigure(7, 7, new Pawn(FigureColour.WHITE));
     }
 
 
-
+    //model pamieciowy
+    //metody draw / refreach board
 
 }
