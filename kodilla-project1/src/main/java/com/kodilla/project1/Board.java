@@ -12,7 +12,8 @@ public class Board {
     private final GridPane grid;
     private int col1 =-1;
     private int row1 =-1;
-    private final boolean lastMoveWhite = true;
+    private boolean lastMoveWhite = true;
+    private FigureColour currentMoveWhite;
 
     public Board(GridPane grid) {
         this.grid = grid;
@@ -50,6 +51,11 @@ public class Board {
             setFigure(oldCol, oldRow, new None());
             showBoard();
             System.out.println(String.format("Move from %d %d to %d %d", oldCol, oldRow, newCol, newRow));
+        }
+        if (lastMoveWhite){
+            lastMoveWhite = false;
+        } else {
+            lastMoveWhite = true;
         }
     }
 
@@ -111,19 +117,30 @@ public class Board {
             showBoard();
             System.out.println(String.format("Move from %d %d to %d %d", oldCol, oldRow, newCol, newRow));
         }
+        if (lastMoveWhite){
+            lastMoveWhite = false;
+        } else {
+            lastMoveWhite = true;
+        }
     }
 
     public void clickAction(int col, int row) {
-        if (col1==-1){
+        /*currentMoveWhite=getFigure(col,row).getColour();
+        if (lastMoveWhite && (currentMoveWhite == FigureColour.WHITE)){
+            break;
+            jak zakonczyc metode zwracajaca void w tym miejscu, gdy jest true? SWITCH?
+        }*/
+        if (col1 == -1) {
             col1 = col;
             row1 = row;
-        } else if (Math.abs(col-col1)==2){
+        } else if (Math.abs(col - col1) == 2) {
             attack(col1, row1, col, row);
             col1 = -1;
         } else {
             move(col1, row1, col, row);
             col1 = -1;
         }
+
     }
 
     public void showBoard() {
