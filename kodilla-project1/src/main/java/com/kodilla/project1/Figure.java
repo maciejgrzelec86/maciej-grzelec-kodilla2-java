@@ -7,8 +7,8 @@ public class Figure {
     //private double mouseClickA, mouseClickB;
     //private double oldPositionX, oldPositionY;
 
-    public Image whitePawn = new javafx.scene.image.Image("file:resources/white_pawn_128.png");
-    public Image blackPawn = new javafx.scene.image.Image("file:resources/black_pawn_128.png");
+    private Image whitePawn = new Image("file:kodilla-project1/src/main/resources/white_pawn_128.png");
+    private Image blackPawn = new Image("file:kodilla-project1/src/main/resources/black_pawn_128.png");
 
     public Figure(FigureColour colour) {
         this.colour = colour;
@@ -24,11 +24,11 @@ public class Figure {
         } else if (getColour()==FigureColour.BLACK) {
             return blackPawn;
         } else {
-            return blackPawn; // co tutaj??
+            return null;
         }
     }
 
-    public boolean notNullOrNone(Figure figure) {
+    public boolean notNullOrNotNone(Figure figure) {
         if (figure.getColour()==FigureColour.WHITE || figure.getColour()==FigureColour.BLACK) {
             return true;
         } else {

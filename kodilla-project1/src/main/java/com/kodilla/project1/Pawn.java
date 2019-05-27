@@ -7,14 +7,6 @@ public class Pawn extends Figure {
     public Pawn(FigureColour colour) {
         super(colour);
     }
+    //wspolrzedne
 
-    @Override
-    public Image getImage() {
-        if (getColour() == FigureColour.WHITE) {
-            return whitePawn;
-        } else {
-            //else if (getColour() == FigureColour.BLACK) ... else
-            return blackPawn;
-        }
-    }
 }

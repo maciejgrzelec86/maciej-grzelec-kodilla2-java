@@ -1,8 +1,8 @@
 package com.kodilla.project1;
-import javafx.scene.Group;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +10,9 @@ public class Board {
 
     private final List<BoardRow> rows = new ArrayList<>();
     private final GridPane grid;
-    //private final Group pawnGroup = new Group();
+    private int col1 =-1;
+    private int row1 =-1;
+    private final boolean lastMoveWhite = true;
 
     public Board(GridPane grid) {
         this.grid = grid;
@@ -18,7 +20,7 @@ public class Board {
             rows.add(new BoardRow());
         }
     }
-    //720x720
+
     public Figure getFigure(int col, int row){
         return rows.get(row).getCols().get(col);
     }
@@ -28,23 +30,120 @@ public class Board {
         rows.get(row).getCols().remove(col +1);
     }
 
+    public void move(int oldCol, int oldRow, int newCol, int newRow) {
+        if (newCol < 0 || newRow < 0 || newRow >= 8 || newCol >= 8 ||
+                oldCol < 0 || oldRow < 0 || oldRow >= 8 || oldCol >= 8) {
+            System.out.println("Not possible move");
+        } else if ((getFigure(oldCol, oldRow).getColour() == FigureColour.BLACK) && (newRow<=oldRow)) {
+            System.out.println("Not possible move");
+        } else if ((getFigure(oldCol, oldRow).getColour() == FigureColour.WHITE) && (newRow>=oldRow))  {
+            System.out.println("Not possible move");
+        } else if (oldCol==newCol) {
+            System.out.println("Not possible move");
+        } else if ((getFigure(oldCol, oldRow).getColour() == FigureColour.BLACK) && (newRow-oldRow > 1)) {
+            System.out.println("Not possible move");
+        } else if ((getFigure(oldCol, oldRow).getColour() == FigureColour.WHITE) && (oldRow-newRow > 1) )  {
+            System.out.println("Not possible move");
+        } else {
+            Figure figure = getFigure(oldCol, oldRow);
+            setFigure(newCol, newRow, figure);
+            setFigure(oldCol, oldRow, new None());
+            showBoard();
+            System.out.println(String.format("Move from %d %d to %d %d", oldCol, oldRow, newCol, newRow));
+        }
+    }
+
+    public void attack(int oldCol, int oldRow, int newCol, int newRow) {
+        FigureColour attackingColour = getFigure(oldCol, oldRow).getColour();
+
+        if (newCol < 0 || newRow < 0 || newRow >= 8 || newCol >= 8 ||
+                oldCol < 0 || oldRow < 0 || oldRow >= 8 || oldCol >= 8) {
+            System.out.println("Not possible move");
+        } else if ((attackingColour == FigureColour.BLACK) && (newRow<=oldRow)) {
+            System.out.println("Not possible move");
+        } else if ((attackingColour == FigureColour.WHITE) && (newRow>=oldRow))  {
+            System.out.println("Not possible move");
+        } else if (oldCol==newCol) {
+            System.out.println("Not possible move");
+        } else if (attackingColour == FigureColour.NONE){
+            System.out.println("Not possible move");
+        } else if ((attackingColour == FigureColour.BLACK) &&
+                (newCol > oldCol) && (getFigure(newCol-1, newRow-1).getColour() == attackingColour )){
+            System.out.println("Not possible move");
+        } else if ((attackingColour == FigureColour.BLACK) &&
+                (newCol < oldCol) && (getFigure(newCol+1, newRow-1).getColour() == attackingColour)){
+            System.out.println("Not possible move");
+        } else if ((attackingColour == FigureColour.WHITE) &&
+                (newCol > oldCol) && (getFigure(newCol-1, newRow+1).getColour() == attackingColour)){
+            System.out.println("Not possible move");
+        } else if ((attackingColour == FigureColour.WHITE) &&
+                (newCol < oldCol) && (getFigure(newCol+1, newRow+1).getColour() == attackingColour)){
+            System.out.println("Not possible move");
+        } else if ((attackingColour == FigureColour.BLACK) &&
+                (newCol > oldCol) && (getFigure(newCol-1, newRow-1).getColour() == FigureColour.NONE )){
+            System.out.println("Not possible move");
+        } else if ((attackingColour == FigureColour.BLACK) &&
+                (newCol < oldCol) && (getFigure(newCol+1, newRow-1).getColour() == FigureColour.NONE)){
+            System.out.println("Not possible move");
+        } else if ((attackingColour == FigureColour.WHITE) &&
+                (newCol > oldCol) && (getFigure(newCol-1, newRow+1).getColour() == FigureColour.NONE)){
+            System.out.println("Not possible move");
+        } else if ((attackingColour == FigureColour.WHITE) &&
+                (newCol < oldCol) && (getFigure(newCol+1, newRow+1).getColour() == FigureColour.NONE)){
+            System.out.println("Not possible move");
+        }
+        else {
+            Figure figure = getFigure(oldCol, oldRow);
+            setFigure(newCol, newRow, figure);
+            setFigure(oldCol, oldRow, new None());
+            if ((attackingColour == FigureColour.WHITE) && (newCol < oldCol)) {
+                setFigure(oldCol-1, oldRow-1, new None());
+            }
+            if ((attackingColour == FigureColour.WHITE) && (newCol > oldCol)) {
+                setFigure(oldCol+1, oldRow-1, new None());
+            }
+            if ((attackingColour == FigureColour.BLACK) && (newCol > oldCol)) {
+                setFigure(oldCol+1, oldRow+1, new None());
+            }
+            if ((attackingColour == FigureColour.BLACK) && (newCol < oldCol)) {
+                setFigure(oldCol-1, oldRow+1, new None());
+            }
+            showBoard();
+            System.out.println(String.format("Move from %d %d to %d %d", oldCol, oldRow, newCol, newRow));
+        }
+    }
+
+    public void clickAction(int col, int row) {
+        if (col1==-1){
+            col1 = col;
+            row1 = row;
+        } else if (Math.abs(col-col1)==2){
+            attack(col1, row1, col, row);
+            col1 = -1;
+        } else {
+            move(col1, row1, col, row);
+            col1 = -1;
+        }
+    }
+
     public void showBoard() {
+        //Figure figureWhite = new Figure(FigureColour.WHITE);
+        //Figure figureBlack = new Figure(FigureColour.BLACK);
 
-        Figure figureWhite = new Figure(FigureColour.WHITE);
-        Figure figureBlack = new Figure(FigureColour.BLACK);
-
-        grid.getChildren().clear();
+        grid.getChildren().clear(); //a background?
 
         for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 8; y++){
-                if (getFigure(x, y).getColour() == FigureColour.WHITE) {
-                    ImageView imageWhite = new ImageView(figureWhite.getImage());
-                    grid.add(imageWhite, x, y); // add po getChildren() moze miec tylko jeden indeks?
-                } else if (getFigure(x, y).getColour() == FigureColour.BLACK){
-                    ImageView imageBlack = new ImageView(figureBlack.getImage());
-                    grid.add(imageBlack, x, y);
+                Figure figure = getFigure(x, y);
+                if (!(figure instanceof None)){
+
+                    ImageView imageView = new ImageView(figure.getImage());
+                    grid.add(imageView, x, y);
+                    GridPane.setHalignment(imageView, HPos.CENTER);
+                    GridPane.setValignment(imageView, VPos.CENTER);
+                    //System.out.println("aaNo figure in spot: " + x + ", " + y);
                 } else {
-                    System.out.println("No figure in spot: " + x + ", " + y);
+                    //System.out.println("No figure in spot: " + x + ", " + y);
                 }
             }
         }
@@ -96,9 +195,4 @@ public class Board {
         setFigure(5, 7, new Pawn(FigureColour.WHITE));
         setFigure(7, 7, new Pawn(FigureColour.WHITE));
     }
-
-
-    //model pamieciowy
-    //metody draw / refreach board
-
 }

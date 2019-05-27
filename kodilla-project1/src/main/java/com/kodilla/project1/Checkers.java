@@ -3,14 +3,15 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Checkers extends Application {
 
     public static final int BOARD_SIZE = 600; // czemu juz przy 900 powieksza image?
-    private final Image imageback = new Image("file:kodilla-project1/src/main/resources/checkers_board.jpg");
+    public static final int ROW_COL_CONSTRAINTS = BOARD_SIZE/8;
+    private Image imageback = new Image("file:kodilla-project1/src/main/resources/checkers_board.jpg");
     private Board board;
 
     public static void main(String[] args) {
@@ -19,32 +20,42 @@ public class Checkers extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        BackgroundSize backgroundSize = new BackgroundSize(100, 100, true,
-                true, true, false);
-        BackgroundImage backgroundImage = new BackgroundImage(imageback, BackgroundRepeat.REPEAT,
+        BackgroundSize backgroundSize = new BackgroundSize(BOARD_SIZE, BOARD_SIZE, false,
+                false, true, false);
+        BackgroundImage backgroundImage = new BackgroundImage(imageback, BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background background = new Background(backgroundImage);
 
         GridPane grid = new GridPane();
+
+        for (int i =0; i <8 ;i++){
+            grid.getColumnConstraints().add(new ColumnConstraints(ROW_COL_CONSTRAINTS));
+        }
+
+        for (int i =0; i <8 ;i++){
+            grid.getRowConstraints().add(new RowConstraints(ROW_COL_CONSTRAINTS));
+        }
+
         grid.setAlignment(Pos.CENTER);
         grid.setBackground(background);
+
+        grid.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            int col = (int)e.getX()/ROW_COL_CONSTRAINTS;
+            int row = (int)e.getY()/ROW_COL_CONSTRAINTS;
+            System.out.println(col + ", " + row);
+            board.clickAction(col, row);
+        });
 
         board = new Board(grid);
         board.initBoard();
         board.showBoard();
 
         Scene scene = new Scene(grid, BOARD_SIZE, BOARD_SIZE);
-        //scene.setFill(Color.TRANSPARENT);
 
+        primaryStage.setResizable(false);
         primaryStage.setTitle("Checkers");
         primaryStage.setScene(scene);
         primaryStage.show();
-
-        //System.out.println(board.getFigure(7,7));
-        System.out.println(grid.getChildren());
-        //System.out.println(grid.getScene());
-        //grid.setVisible(true);
-
     }
 }
 
