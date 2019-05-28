@@ -30,32 +30,49 @@ public class Board {
         rows.get(row).getCols().add(col, figure);
         rows.get(row).getCols().remove(col +1);
     }
+    public boolean properTurn(int oldColT, int oldRowT) {
+        if((lastMoveWhite && (getFigure(oldColT, oldRowT).getColour() == FigureColour.BLACK))||
+                !(lastMoveWhite) && (getFigure(oldColT, oldRowT).getColour() == FigureColour.WHITE)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean properMove(int oldCol, int oldRow, int newCol, int newRow) {
+
+        return true;
+    }
 
     public void move(int oldCol, int oldRow, int newCol, int newRow) {
-        if (newCol < 0 || newRow < 0 || newRow >= 8 || newCol >= 8 ||
-                oldCol < 0 || oldRow < 0 || oldRow >= 8 || oldCol >= 8) {
-            System.out.println("Not possible move");
-        } else if ((getFigure(oldCol, oldRow).getColour() == FigureColour.BLACK) && (newRow<=oldRow)) {
-            System.out.println("Not possible move");
-        } else if ((getFigure(oldCol, oldRow).getColour() == FigureColour.WHITE) && (newRow>=oldRow))  {
-            System.out.println("Not possible move");
-        } else if (oldCol==newCol) {
-            System.out.println("Not possible move");
-        } else if ((getFigure(oldCol, oldRow).getColour() == FigureColour.BLACK) && (newRow-oldRow > 1)) {
-            System.out.println("Not possible move");
-        } else if ((getFigure(oldCol, oldRow).getColour() == FigureColour.WHITE) && (oldRow-newRow > 1) )  {
-            System.out.println("Not possible move");
+        if (properTurn(oldCol, oldRow)) {
+            if (newCol < 0 || newRow < 0 || newRow >= 8 || newCol >= 8 ||
+                    oldCol < 0 || oldRow < 0 || oldRow >= 8 || oldCol >= 8) {
+                    System.out.println("Not possible move");
+            } else if ((getFigure(oldCol, oldRow).getColour() == FigureColour.BLACK) && (newRow<=oldRow)) {
+                System.out.println("Not possible move");
+            } else if ((getFigure(oldCol, oldRow).getColour() == FigureColour.WHITE) && (newRow>=oldRow))  {
+                System.out.println("Not possible move");
+            } else if (oldCol==newCol) {
+                System.out.println("Not possible move");
+            } else if ((getFigure(oldCol, oldRow).getColour() == FigureColour.BLACK) && (newRow-oldRow > 1)) {
+                System.out.println("Not possible move");
+            } else if ((getFigure(oldCol, oldRow).getColour() == FigureColour.WHITE) && (oldRow-newRow > 1) )  {
+                System.out.println("Not possible move");
+            } else {
+                Figure figure = getFigure(oldCol, oldRow);
+                setFigure(newCol, newRow, figure);
+                setFigure(oldCol, oldRow, new None());
+                showBoard();
+                System.out.println(String.format("Move from %d %d to %d %d", oldCol, oldRow, newCol, newRow));
+            }
+            if (lastMoveWhite){
+                lastMoveWhite = false;
+            } else {
+                lastMoveWhite = true;
+            }
         } else {
-            Figure figure = getFigure(oldCol, oldRow);
-            setFigure(newCol, newRow, figure);
-            setFigure(oldCol, oldRow, new None());
-            showBoard();
-            System.out.println(String.format("Move from %d %d to %d %d", oldCol, oldRow, newCol, newRow));
-        }
-        if (lastMoveWhite){
-            lastMoveWhite = false;
-        } else {
-            lastMoveWhite = true;
+            System.out.println("Wrong turn");
         }
     }
 
@@ -125,11 +142,6 @@ public class Board {
     }
 
     public void clickAction(int col, int row) {
-        /*currentMoveWhite=getFigure(col,row).getColour();
-        if (lastMoveWhite && (currentMoveWhite == FigureColour.WHITE)){
-            break;
-            jak zakonczyc metode zwracajaca void w tym miejscu, gdy jest true? SWITCH?
-        }*/
         if (col1 == -1) {
             col1 = col;
             row1 = row;
@@ -140,14 +152,13 @@ public class Board {
             move(col1, row1, col, row);
             col1 = -1;
         }
-
     }
 
     public void showBoard() {
         //Figure figureWhite = new Figure(FigureColour.WHITE);
         //Figure figureBlack = new Figure(FigureColour.BLACK);
 
-        grid.getChildren().clear(); //a background?
+        grid.getChildren().clear();
 
         for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 8; y++){

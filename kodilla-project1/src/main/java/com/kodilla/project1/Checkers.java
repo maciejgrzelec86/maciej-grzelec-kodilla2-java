@@ -23,7 +23,7 @@ public class Checkers extends Application {
         BackgroundSize backgroundSize = new BackgroundSize(BOARD_SIZE, BOARD_SIZE, false,
                 false, true, false);
         BackgroundImage backgroundImage = new BackgroundImage(imageback, BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, backgroundSize);
         Background background = new Background(backgroundImage);
 
         GridPane grid = new GridPane();
