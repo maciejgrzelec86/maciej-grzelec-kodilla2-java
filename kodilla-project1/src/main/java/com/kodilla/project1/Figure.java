@@ -4,8 +4,6 @@ import javafx.scene.image.Image;
 
 public class Figure {
     private FigureColour colour;
-    //private double mouseClickA, mouseClickB;
-    //private double oldPositionX, oldPositionY;
 
     private Image whitePawn = new Image("file:kodilla-project1/src/main/resources/white_pawn_128_tran.png");
     private Image blackPawn = new Image("file:kodilla-project1/src/main/resources/black_pawn_128_tran.png");
@@ -27,13 +25,4 @@ public class Figure {
             return null;
         }
     }
-
-    public boolean notNullOrNotNone(Figure figure) {
-        if (figure.getColour()==FigureColour.WHITE || figure.getColour()==FigureColour.BLACK) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }

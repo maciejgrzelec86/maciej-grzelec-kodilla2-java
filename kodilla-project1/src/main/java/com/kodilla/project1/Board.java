@@ -29,14 +29,14 @@ public class Board {
         rows.get(row).getCols().add(col, figure);
         rows.get(row).getCols().remove(col +1);
     }
-    public boolean properTurn(int oldCol, int oldRow) {
+    /*public boolean properTurn(int oldCol, int oldRow) {
         if((lastMoveWhite && (getFigure(oldCol, oldRow).getColour() == FigureColour.BLACK))||
                 !(lastMoveWhite) && (getFigure(oldCol, oldRow).getColour() == FigureColour.WHITE)) {
             return true;
         } else {
             return false;
         }
-    }
+    }*/
 
     public boolean properMove(int oldCol, int oldRow, int newCol, int newRow) {
         if (newCol < 0 || newRow < 0 || newRow >= 8 || newCol >= 8 ||
@@ -52,7 +52,9 @@ public class Board {
             return false;
         } else if ((getFigure(oldCol, oldRow).getColour() == FigureColour.WHITE) && (oldRow - newRow > 1)) {
             return false;
-        } else if ((getFigure(newCol, newRow).getColour() == FigureColour.NONE)){
+        } else if (Math.abs(newCol-oldCol)>1) {
+            return false;
+        } else if (oldCol==newCol && oldRow == newRow){
             return false;
         } else {
             return true;
@@ -103,7 +105,7 @@ public class Board {
     }
 
     public void move(int oldCol, int oldRow, int newCol, int newRow) {
-        if ((properTurn(oldCol, oldRow) && properMove(oldCol, oldRow, newCol, newRow))) {
+        if (properMove(oldCol, oldRow, newCol, newRow)) {
             Figure figure = getFigure(oldCol, oldRow);
             setFigure(newCol, newRow, figure);
             setFigure(oldCol, oldRow, new None());
@@ -115,11 +117,11 @@ public class Board {
                 lastMoveWhite = true;
             }
         }
-    }
+    } //(properTurn(oldCol, oldRow) &&
 
     public void attack(int oldCol, int oldRow, int newCol, int newRow) {
         FigureColour attackingColour = getFigure(oldCol, oldRow).getColour();
-        if ((properTurn(oldCol, oldRow) && properAttack(oldCol, oldRow, newCol, newRow))) {
+        if (properAttack(oldCol, oldRow, newCol, newRow)) {
             Figure figure = getFigure(oldCol, oldRow);
             setFigure(newCol, newRow, figure);
             setFigure(oldCol, oldRow, new None());
