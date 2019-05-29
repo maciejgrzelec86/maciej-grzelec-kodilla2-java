@@ -9,8 +9,8 @@ import javafx.stage.Stage;
 
 public class Checkers extends Application {
 
-    public static final int BOARD_SIZE = 600; // czemu juz przy 900 powieksza image?
-    public static final int ROW_COL_CONSTRAINTS = BOARD_SIZE/8;
+    public static final int BOARD_SIZE = 700; // czemu juz przy 900 powieksza image?
+    public static final int ROW_COL_CONSTRAINTS = BOARD_SIZE / 8;
     private Image imageback = new Image("file:kodilla-project1/src/main/resources/checkers_board.jpg");
     private Board board;
 

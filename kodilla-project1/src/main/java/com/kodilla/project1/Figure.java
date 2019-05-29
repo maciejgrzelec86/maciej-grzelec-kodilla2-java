@@ -7,8 +7,8 @@ public class Figure {
     //private double mouseClickA, mouseClickB;
     //private double oldPositionX, oldPositionY;
 
-    private Image whitePawn = new Image("file:kodilla-project1/src/main/resources/white_pawn_128.png");
-    private Image blackPawn = new Image("file:kodilla-project1/src/main/resources/black_pawn_128.png");
+    private Image whitePawn = new Image("file:kodilla-project1/src/main/resources/white_pawn_128_tran.png");
+    private Image blackPawn = new Image("file:kodilla-project1/src/main/resources/black_pawn_128_tran.png");
 
     public Figure(FigureColour colour) {
         this.colour = colour;
