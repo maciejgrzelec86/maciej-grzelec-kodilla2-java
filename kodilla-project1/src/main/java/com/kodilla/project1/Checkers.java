@@ -13,7 +13,7 @@ public class Checkers extends Application {
     public static final int ROW_COL_CONSTRAINTS = BOARD_SIZE / 8;
     private Image imageback = new Image("file:kodilla-project1/src/main/resources/checkers_board.jpg");
     private Board board;
-
+    private boolean firstClick = true;
     public static void main(String[] args) {
         launch(args);
     }
@@ -42,8 +42,13 @@ public class Checkers extends Application {
         grid.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
             int col = (int)e.getX()/ROW_COL_CONSTRAINTS;
             int row = (int)e.getY()/ROW_COL_CONSTRAINTS;
-            System.out.println(col + ", " + row);
+            System.out.println(col + ", " + row + ", firstClick: " + firstClick);
             board.clickAction(col, row);
+            if (firstClick) {
+                firstClick = false;
+            } else {
+                firstClick = true;
+            }
         });
 
         board = new Board(grid);
