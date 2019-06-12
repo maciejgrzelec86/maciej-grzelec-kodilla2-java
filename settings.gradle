@@ -4,4 +4,5 @@ include 'kodilla-exception'
 include 'kodilla-project1'
 include 'kodilla-arrays'
 include 'kodilla-testinggg'
+include 'kodilla-good-paterns'
 

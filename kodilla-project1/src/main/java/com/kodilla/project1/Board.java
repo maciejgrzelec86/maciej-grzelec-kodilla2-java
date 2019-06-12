@@ -1,6 +1,8 @@
 package com.kodilla.project1;
+
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import java.util.ArrayList;
@@ -10,30 +12,35 @@ public class Board {
 
     private final List<BoardRow> rows = new ArrayList<>();
     private final GridPane grid;
-    private int col1 =-1;
-    private int row1 =-1;
+    private final Image blackPawn;
+    private final Image whitePawn;
+    private int col1 = -1;
+    private int row1 = -1;
     private boolean lastMoveWhite = true;
     private int sumWhite = 0;
     private int sumBlack = 0;
 
-    public Board(GridPane grid) {
+    public Board(GridPane grid, Image blackPawn, Image whitePawn) {
         this.grid = grid;
-        for (int x =0; x < 8; x++) {
+        this.blackPawn = blackPawn;
+        this.whitePawn = whitePawn;
+        for (int x = 0; x < 8; x++) {
             rows.add(new BoardRow());
         }
     }
 
-    public Figure getFigure(int col, int row){
+    public Figure getFigure(int col, int row) {
         return rows.get(row).getCols().get(col);
     }
 
     public void setFigure(int col, int row, Figure figure) {
         rows.get(row).getCols().add(col, figure);
-        rows.get(row).getCols().remove(col +1);
+        rows.get(row).getCols().remove(col + 1);
     }
+
     public boolean properTurn(int oldCol, int oldRow) {
-        if((lastMoveWhite && (getFigure(oldCol, oldRow).getColour() == FigureColour.BLACK))||
-                !(lastMoveWhite) && (getFigure(oldCol, oldRow).getColour() == FigureColour.WHITE)) {
+        if ((lastMoveWhite && (getColour(oldCol, oldRow) == FigureColour.BLACK)) ||
+                !(lastMoveWhite) && (getColour(oldCol, oldRow) == FigureColour.WHITE)) {
             return true;
         } else {
             return false;
@@ -44,64 +51,66 @@ public class Board {
         if (newCol < 0 || newRow < 0 || newRow >= 8 || newCol >= 8 ||
                 oldCol < 0 || oldRow < 0 || oldRow >= 8 || oldCol >= 8) {
             return false;
-        } else if ((getFigure(oldCol, oldRow).getColour() == FigureColour.BLACK) && (newRow <= oldRow)) {
+        } else if ((getColour(oldCol, oldRow) == FigureColour.BLACK) && (newRow <= oldRow)) {
             return false;
-        } else if ((getFigure(oldCol, oldRow).getColour() == FigureColour.WHITE) && (newRow >= oldRow)) {
+        } else if ((getColour(oldCol, oldRow) == FigureColour.WHITE) && (newRow >= oldRow)) {
             return false;
         } else if (oldCol == newCol) {
             return false;
-        } else if ((getFigure(oldCol, oldRow).getColour() == FigureColour.BLACK) && (newRow - oldRow > 1)) {
+        } else if ((getColour(oldCol, oldRow) == FigureColour.BLACK) && (newRow - oldRow > 1)) {
             return false;
-        } else if ((getFigure(oldCol, oldRow).getColour() == FigureColour.WHITE) && (oldRow - newRow > 1)) {
+        } else if ((getColour(oldCol, oldRow) == FigureColour.WHITE) && (oldRow - newRow > 1)) {
             return false;
-        } else if (Math.abs(newCol-oldCol)>1) {
+        } else if (Math.abs(newCol - oldCol) > 1) {
             return false;
-        } else if (oldCol==newCol && oldRow == newRow) {
-            return false;
-        }else if (getFigure(oldCol, oldRow).getColour() == FigureColour.NONE) {
+        } else if (oldRow == newRow) {
             return false;
         } else {
-            return true;
+            return getColour(oldCol, oldRow) != FigureColour.NONE;
         }
     }
 
-    public boolean properAttack (int oldCol, int oldRow, int newCol, int newRow) {
-        FigureColour attackingColour = getFigure(oldCol, oldRow).getColour();
+    private FigureColour getColour(int oldCol, int oldRow) {
+        return getFigure(oldCol, oldRow).getColour();
+    }
+
+    public boolean properAttack(int oldCol, int oldRow, int newCol, int newRow) {
+        FigureColour attackingColour = getColour(oldCol, oldRow);
 
         if (newCol < 0 || newRow < 0 || newRow >= 8 || newCol >= 8 ||
                 oldCol < 0 || oldRow < 0 || oldRow >= 8 || oldCol >= 8) {
             return false;
-        } else if ((attackingColour == FigureColour.BLACK) && (newRow<=oldRow)) {
+        } else if ((attackingColour == FigureColour.BLACK) && (newRow <= oldRow)) {
             return false;
-        } else if ((attackingColour == FigureColour.WHITE) && (newRow>=oldRow))  {
+        } else if ((attackingColour == FigureColour.WHITE) && (newRow >= oldRow)) {
             return false;
-        } else if (oldCol==newCol) {
+        } else if (oldCol == newCol) {
             return false;
-        } else if (attackingColour == FigureColour.NONE){
-            return false;
-        } else if ((attackingColour == FigureColour.BLACK) &&
-                (newCol > oldCol) && (getFigure(newCol-1, newRow-1).getColour() == attackingColour )){
+        } else if (attackingColour == FigureColour.NONE) {
             return false;
         } else if ((attackingColour == FigureColour.BLACK) &&
-                (newCol < oldCol) && (getFigure(newCol+1, newRow-1).getColour() == attackingColour)){
-            return false;
-        } else if ((attackingColour == FigureColour.WHITE) &&
-                (newCol > oldCol) && (getFigure(newCol-1, newRow+1).getColour() == attackingColour)){
-            return false;
-        } else if ((attackingColour == FigureColour.WHITE) &&
-                (newCol < oldCol) && (getFigure(newCol+1, newRow+1).getColour() == attackingColour)){
+                (newCol > oldCol) && (getColour(newCol - 1, newRow - 1) == attackingColour)) {
             return false;
         } else if ((attackingColour == FigureColour.BLACK) &&
-                (newCol > oldCol) && (getFigure(newCol-1, newRow-1).getColour() == FigureColour.NONE )){
+                (newCol < oldCol) && (getColour(newCol + 1, newRow - 1) == attackingColour)) {
+            return false;
+        } else if ((attackingColour == FigureColour.WHITE) &&
+                (newCol > oldCol) && (getColour(newCol - 1, newRow + 1) == attackingColour)) {
+            return false;
+        } else if ((attackingColour == FigureColour.WHITE) &&
+                (newCol < oldCol) && (getColour(newCol + 1, newRow + 1) == attackingColour)) {
             return false;
         } else if ((attackingColour == FigureColour.BLACK) &&
-                (newCol < oldCol) && (getFigure(newCol+1, newRow-1).getColour() == FigureColour.NONE)){
+                (newCol > oldCol) && (getColour(newCol - 1, newRow - 1) == FigureColour.NONE)) {
+            return false;
+        } else if ((attackingColour == FigureColour.BLACK) &&
+                (newCol < oldCol) && (getColour(newCol + 1, newRow - 1) == FigureColour.NONE)) {
             return false;
         } else if ((attackingColour == FigureColour.WHITE) &&
-                (newCol > oldCol) && (getFigure(newCol-1, newRow+1).getColour() == FigureColour.NONE)){
+                (newCol > oldCol) && (getColour(newCol - 1, newRow + 1) == FigureColour.NONE)) {
             return false;
         } else if ((attackingColour == FigureColour.WHITE) &&
-                (newCol < oldCol) && (getFigure(newCol+1, newRow+1).getColour() == FigureColour.NONE)){
+                (newCol < oldCol) && (getColour(newCol + 1, newRow + 1) == FigureColour.NONE)) {
             return false;
         } else {
             return true;
@@ -109,71 +118,78 @@ public class Board {
     }
 
     public void move(int oldCol, int oldRow, int newCol, int newRow) {
-        FigureColour attackingColour = getFigure(oldCol, oldRow).getColour();
         if (properTurn(oldCol, oldRow) && properMove(oldCol, oldRow, newCol, newRow)) {
-            Figure figure = getFigure(oldCol, oldRow);
-            setFigure(newCol, newRow, figure);
-            setFigure(oldCol, oldRow, new None());
-            showBoard();
-            System.out.println(String.format("Move from %d %d to %d %d", oldCol, oldRow, newCol, newRow));
-            if (lastMoveWhite){
-                lastMoveWhite = false;
-            } else {
-                lastMoveWhite = true;
-            }
-            if ((attackingColour == FigureColour.BLACK) && newRow==7) {
-                setFigure(newCol, newRow, new Queen(FigureColour.BLACK));
-            }
-            if ((attackingColour == FigureColour.WHITE) && newRow==0) {
-                setFigure(newCol, newRow, new Queen(FigureColour.WHITE));
-            }
+            doMove(oldCol, oldRow, newCol, newRow);
+            switchToQueenIfAvailable(newCol, newRow, getColour(oldCol, oldRow));
+            showBoardAndInfo(oldCol, oldRow, newCol, newRow);
+            switchLastMove();
         }
+        checkIfGameIsFinished();
+    }
+
+    private void showBoardAndInfo(int oldCol, int oldRow, int newCol, int newRow) {
+        showBoard();
+        System.out.println(String.format("Move from %d %d to %d %d", oldCol, oldRow, newCol, newRow));
+    }
+
+    private void doMove(int oldCol, int oldRow, int newCol, int newRow) {
+        Figure figure = getFigure(oldCol, oldRow);
+        setFigure(newCol, newRow, figure);
+        setFigure(oldCol, oldRow, new None());
+    }
+
+    private void checkIfGameIsFinished() {
         switch (isGameFinished()) {
             case WHITE:
                 System.out.println("White colour wins!!");
+                break;
             case BLACK:
                 System.out.println("Black colour wins!!");
+                break;
+        }
+    }
+
+    private void switchLastMove() {
+        if (lastMoveWhite) {
+            lastMoveWhite = false;
+        } else {
+            lastMoveWhite = true;
+        }
+    }
+
+    private void switchToQueenIfAvailable(int newCol, int newRow, FigureColour attackingColour) {
+        if ((attackingColour == FigureColour.BLACK) && newRow == 7) {
+            setFigure(newCol, newRow, new Queen(FigureColour.BLACK));
+        }
+        if ((attackingColour == FigureColour.WHITE) && newRow == 0) {
+            setFigure(newCol, newRow, new Queen(FigureColour.WHITE));
         }
     }
 
     public void attack(int oldCol, int oldRow, int newCol, int newRow) {
-        FigureColour attackingColour = getFigure(oldCol, oldRow).getColour();
         if (properTurn(oldCol, oldRow) && properAttack(oldCol, oldRow, newCol, newRow)) {
-            Figure figure = getFigure(oldCol, oldRow);
-            setFigure(newCol, newRow, figure);
-            setFigure(oldCol, oldRow, new None());
+            FigureColour attackingColour = getColour(oldCol, oldRow);
+            doMove(oldCol, oldRow, newCol, newRow);
+            removeOpponentFigure(oldCol, oldRow, newCol, attackingColour);
+            switchToQueenIfAvailable(newCol, newRow, attackingColour);
+            showBoardAndInfo(oldCol, oldRow, newCol, newRow);
+            switchLastMove();
+        }
+        checkIfGameIsFinished();
+    }
+
+    private void removeOpponentFigure(int oldCol, int oldRow, int newCol, FigureColour attackingColour) {
         if ((attackingColour == FigureColour.WHITE) && (newCol < oldCol)) {
             setFigure(oldCol - 1, oldRow - 1, new None());
         }
         if ((attackingColour == FigureColour.WHITE) && (newCol > oldCol)) {
-           setFigure(oldCol + 1, oldRow - 1, new None());
+            setFigure(oldCol + 1, oldRow - 1, new None());
         }
         if ((attackingColour == FigureColour.BLACK) && (newCol > oldCol)) {
-           setFigure(oldCol + 1, oldRow + 1, new None());
+            setFigure(oldCol + 1, oldRow + 1, new None());
         }
         if ((attackingColour == FigureColour.BLACK) && (newCol < oldCol)) {
-           setFigure(oldCol - 1, oldRow + 1, new None());
-        }
-        if ((attackingColour == FigureColour.BLACK) && newRow==7) {
-                setFigure(newCol, newRow, new Queen(FigureColour.BLACK));
-        }
-        if ((attackingColour == FigureColour.WHITE) && newRow==0) {
-                setFigure(newCol, newRow, new Queen(FigureColour.WHITE));
-        }
-        showBoard();
-        System.out.println(String.format("Move from %d %d to %d %d", oldCol, oldRow, newCol, newRow));
-
-        if (lastMoveWhite) {
-           lastMoveWhite = false;
-        } else {
-           lastMoveWhite = true;
-        }
-        }
-        switch (isGameFinished()){
-            case WHITE:
-                System.out.println("White colour wins!!");
-            case BLACK:
-                System.out.println("Black colour wins!!");
+            setFigure(oldCol - 1, oldRow + 1, new None());
         }
     }
 
@@ -195,18 +211,18 @@ public class Board {
         sumBlack = 0;
         for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 8; y++) {
-                if (getFigure(x, y).getColour() == FigureColour.WHITE) {
+                if (getColour(x, y) == FigureColour.WHITE) {
                     sumWhite = sumWhite + 1;
                 }
-                if (getFigure(x, y).getColour() == FigureColour.BLACK) {
+                if (getColour(x, y) == FigureColour.BLACK) {
                     sumBlack = sumBlack + 1;
                 }
             }
         }
-        if (sumBlack==0) {
-            return  FigureColour.WHITE;
-        } else if (sumWhite==0){
-            return  FigureColour.BLACK;
+        if (sumBlack == 0) {
+            return FigureColour.WHITE;
+        } else if (sumWhite == 0) {
+            return FigureColour.BLACK;
         } else {
             return FigureColour.NONE;
         }
@@ -216,9 +232,9 @@ public class Board {
         grid.getChildren().clear();
 
         for (int x = 0; x < 8; x++) {
-            for (int y = 0; y < 8; y++){
+            for (int y = 0; y < 8; y++) {
                 Figure figure = getFigure(x, y);
-                if (!(figure instanceof None)){
+                if (!(figure instanceof None)) {
                     ImageView imageView = new ImageView(figure.getImage());
                     grid.add(imageView, x, y);
                     GridPane.setHalignment(imageView, HPos.CENTER);
@@ -226,20 +242,19 @@ public class Board {
                 }
             }
         }
-
     }
 
     public void initBoard() {
         for (int x = 0; x < 8; x++) {
-            for (int y =0;y < 8; y++) {
-                if((y<=2) && ((x + y) % 2 ==0)) {
-                    setFigure(x, y, new Pawn(FigureColour.BLACK));
+            for (int y = 0; y < 8; y++) {
+                if ((y <= 2) && ((x + y) % 2 == 0)) {
+                    setFigure(x, y, new Pawn(FigureColour.BLACK, whitePawn, blackPawn));
                 }
-                if((y>4) && ((x + y) % 2 ==0)) {
-                    setFigure(x, y, new Pawn(FigureColour.WHITE));
+                if ((y > 4) && ((x + y) % 2 == 0)) {
+                    setFigure(x, y, new Pawn(FigureColour.WHITE, whitePawn, blackPawn));
                 }
-                if((x + y) % 2 ==1) {
-                    setFigure(x, y, new Pawn(FigureColour.NONE));
+                if ((x + y) % 2 == 1) {
+                    setFigure(x, y, new Pawn(FigureColour.NONE, whitePawn, blackPawn));
                 }
             }
         }
