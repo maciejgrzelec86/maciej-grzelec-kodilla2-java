@@ -12,6 +12,8 @@ public class Checkers extends Application {
 
     private Image whitePawn = new Image("file:kodilla-project1/src/main/resources/white_pawn_128_tran.png");
     private Image blackPawn = new Image("file:kodilla-project1/src/main/resources/black_pawn_128_tran.png");
+    private Image blackQueen = new Image("file:kodilla-project1/src/main/resources/queen_black_trans.png");
+    private Image whiteQueen = new Image("file:kodilla-project1/src/main/resources/white_queen.png");
     public static final int BOARD_SIZE = 650;
     public static final int ROW_COL_CONSTRAINTS = BOARD_SIZE / 8;
     private Image imageback = new Image("file:kodilla-project1/src/main/resources/checkers_board.jpg");

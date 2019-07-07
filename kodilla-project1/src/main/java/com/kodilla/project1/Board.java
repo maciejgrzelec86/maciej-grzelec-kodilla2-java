@@ -57,6 +57,8 @@ public class Board {
             return false;
         } else if (oldCol == newCol) {
             return false;
+        } else if (getColour(newCol, newRow) != FigureColour.NONE) {
+            return false;
         } else if ((getColour(oldCol, oldRow) == FigureColour.BLACK) && (newRow - oldRow > 1)) {
             return false;
         } else if ((getColour(oldCol, oldRow) == FigureColour.WHITE) && (oldRow - newRow > 1)) {
@@ -83,6 +85,8 @@ public class Board {
         } else if ((attackingColour == FigureColour.BLACK) && (newRow <= oldRow)) {
             return false;
         } else if ((attackingColour == FigureColour.WHITE) && (newRow >= oldRow)) {
+            return false;
+        } else if (getColour(newCol, newRow) != FigureColour.NONE) {
             return false;
         } else if (oldCol == newCol) {
             return false;
@@ -119,10 +123,12 @@ public class Board {
 
     public void move(int oldCol, int oldRow, int newCol, int newRow) {
         if (properTurn(oldCol, oldRow) && properMove(oldCol, oldRow, newCol, newRow)) {
+            FigureColour colour = getColour(oldCol, oldRow);
             doMove(oldCol, oldRow, newCol, newRow);
-            switchToQueenIfAvailable(newCol, newRow, getColour(oldCol, oldRow));
+            switchToQueenIfAvailable(newCol, newRow, colour);
             showBoardAndInfo(oldCol, oldRow, newCol, newRow);
             switchLastMove();
+
         }
         checkIfGameIsFinished();
     }
@@ -159,10 +165,10 @@ public class Board {
 
     private void switchToQueenIfAvailable(int newCol, int newRow, FigureColour attackingColour) {
         if ((attackingColour == FigureColour.BLACK) && newRow == 7) {
-            setFigure(newCol, newRow, new Queen(FigureColour.BLACK));
+            setFigure(newCol, newRow, new Queen(FigureColour.BLACK, null, null));
         }
         if ((attackingColour == FigureColour.WHITE) && newRow == 0) {
-            setFigure(newCol, newRow, new Queen(FigureColour.WHITE));
+            setFigure(newCol, newRow, new Queen(FigureColour.WHITE, null, null));
         }
     }
 

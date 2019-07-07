@@ -3,11 +3,19 @@ package com.kodilla.project1;
 import javafx.scene.image.Image;
 
 public class Queen extends Figure {
-    private Image blackQueen = new Image("file:kodilla-project1/src/main/resources/queen_black_trans.png");
-    private Image whiteQueen = new Image("file:kodilla-project1/src/main/resources/white_queen.png");
+    private Image blackQueen;
+    private Image whiteQueen;
 
-    public Queen(FigureColour colour) {
+    public Queen(FigureColour colour, Image whiteImage, Image blackImage) {
         super(colour);
+        whiteQueen = whiteImage;
+        blackQueen = blackImage;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        Queen q = (Queen)o;
+        return q.getColour()== getColour();
     }
 
     @Override

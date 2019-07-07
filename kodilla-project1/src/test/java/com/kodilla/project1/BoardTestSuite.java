@@ -126,8 +126,6 @@ public class BoardTestSuite {
         assertEquals(FigureColour.BLACK, pawnColour);
     }
 
-    /*ten test nie wychodzi - na podstawie debugowania po move pawn nie zmienia sie w quenna chociaz jest swichToQueen
-    a w tej metodzie setFigure(newCol, newRow, new Queen(FigureColour.BLACK, null, null)) - jakby nie nadpisywalo??
     @Test
     public void testSwitchToQueenIfAvailable(){
         //Given
@@ -140,7 +138,7 @@ public class BoardTestSuite {
         Queen queen = new Queen(FigureColour.BLACK, null, null);
         //Then
         assertEquals(queen, testFigure);
-    }*/
+    }
 
     @Test
     public void testSwitchLastMove(){
@@ -162,31 +160,32 @@ public class BoardTestSuite {
         GridPane grid = new GridPane();
         Board board = new Board(grid, null, null);
         //When
-        board.setFigure(0, 0, new Pawn(FigureColour.BLACK, null, null));
-        board.setFigure(0, 2, new Pawn(FigureColour.BLACK, null, null));
-        board.setFigure(1, 1, new Pawn(FigureColour.BLACK, null, null));
-        board.setFigure(2, 0, new Pawn(FigureColour.BLACK, null, null));
-        board.setFigure(2, 2, new Pawn(FigureColour.BLACK, null, null));
-        board.setFigure(3, 1, new Pawn(FigureColour.BLACK, null, null));
-        board.setFigure(4, 0, new Pawn(FigureColour.BLACK, null, null));
-        board.setFigure(4, 2, new Pawn(FigureColour.BLACK, null, null));
-        board.setFigure(5, 1, new Pawn(FigureColour.BLACK, null, null));
-        board.setFigure(6, 0, new Pawn(FigureColour.BLACK, null, null));
-        board.setFigure(6, 2, new Pawn(FigureColour.BLACK, null, null));
-        board.setFigure(7, 1, new Pawn(FigureColour.BLACK, null, null));
-
-        board.setFigure(0, 6, new Pawn(FigureColour.WHITE, null, null));
-        board.setFigure(1, 5, new Pawn(FigureColour.WHITE, null, null));
-        board.setFigure(1, 7, new Pawn(FigureColour.WHITE, null, null));
-        board.setFigure(2, 6, new Pawn(FigureColour.WHITE, null, null));
-        board.setFigure(3, 5, new Pawn(FigureColour.WHITE, null, null));
-        board.setFigure(3, 7, new Pawn(FigureColour.WHITE, null, null));
-        board.setFigure(4, 6, new Pawn(FigureColour.WHITE, null, null));
-        board.setFigure(5, 5, new Pawn(FigureColour.WHITE, null, null));
-        board.setFigure(5, 7, new Pawn(FigureColour.WHITE, null, null));
-        board.setFigure(6, 6, new Pawn(FigureColour.WHITE, null, null));
-        board.setFigure(7, 5, new Pawn(FigureColour.WHITE, null, null));
-        board.setFigure(7, 7, new Pawn(FigureColour.WHITE, null, null));
+        board.initBoard();
+//        board.setFigure(0, 0, new Pawn(FigureColour.BLACK, null, null));
+//        board.setFigure(0, 2, new Pawn(FigureColour.BLACK, null, null));
+//        board.setFigure(1, 1, new Pawn(FigureColour.BLACK, null, null));
+//        board.setFigure(2, 0, new Pawn(FigureColour.BLACK, null, null));
+//        board.setFigure(2, 2, new Pawn(FigureColour.BLACK, null, null));
+//        board.setFigure(3, 1, new Pawn(FigureColour.BLACK, null, null));
+//        board.setFigure(4, 0, new Pawn(FigureColour.BLACK, null, null));
+//        board.setFigure(4, 2, new Pawn(FigureColour.BLACK, null, null));
+//        board.setFigure(5, 1, new Pawn(FigureColour.BLACK, null, null));
+//        board.setFigure(6, 0, new Pawn(FigureColour.BLACK, null, null));
+//        board.setFigure(6, 2, new Pawn(FigureColour.BLACK, null, null));
+//        board.setFigure(7, 1, new Pawn(FigureColour.BLACK, null, null));
+//
+//        board.setFigure(0, 6, new Pawn(FigureColour.WHITE, null, null));
+//        board.setFigure(1, 5, new Pawn(FigureColour.WHITE, null, null));
+//        board.setFigure(1, 7, new Pawn(FigureColour.WHITE, null, null));
+//        board.setFigure(2, 6, new Pawn(FigureColour.WHITE, null, null));
+//        board.setFigure(3, 5, new Pawn(FigureColour.WHITE, null, null));
+//        board.setFigure(3, 7, new Pawn(FigureColour.WHITE, null, null));
+//        board.setFigure(4, 6, new Pawn(FigureColour.WHITE, null, null));
+//        board.setFigure(5, 5, new Pawn(FigureColour.WHITE, null, null));
+//        board.setFigure(5, 7, new Pawn(FigureColour.WHITE, null, null));
+//        board.setFigure(6, 6, new Pawn(FigureColour.WHITE, null, null));
+//        board.setFigure(7, 5, new Pawn(FigureColour.WHITE, null, null));
+//        board.setFigure(7, 7, new Pawn(FigureColour.WHITE, null, null));
         //Then
         for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 8; y++) {
