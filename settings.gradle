@@ -5,6 +5,8 @@ include 'kodilla-project1'
 include 'kodilla-arrays'
 include 'kodilla-good-paterns'
 include 'kodilla-spring'
+include 'kodilla-patterns'
+include 'kodilla-spring-web'
 
 
 
