@@ -45,9 +45,15 @@ public class ForumTestSuite {
 
         //Then
         countingStatistics.calculateAdvStatistic();
-        Assert.assertEquals(countingStatistics.getAverageCommentsPerPost(), 0, 0.1);
-        Assert.assertEquals(countingStatistics.getAverageCommentsPerUser(), 0, 0.1);
-        Assert.assertEquals(countingStatistics.getAveragePostsPerUser(), 0,0.1);
+        int quantityOfUsers = countingStatistics.getUsersCount();
+        int quantityOfPosts = countingStatistics.getPostsCount();
+        int quantityOfComments = countingStatistics.getCommentsCount();
+        Assert.assertEquals(5, quantityOfUsers);
+        Assert.assertEquals(0, quantityOfPosts);
+        Assert.assertEquals(0, quantityOfComments);
+        Assert.assertEquals(0, countingStatistics.getAverageCommentsPerPost(), 0.1);
+        Assert.assertEquals(0, countingStatistics.getAverageCommentsPerUser(), 0.1);
+        Assert.assertEquals(0, countingStatistics.getAveragePostsPerUser(),0.1);
     }
 
     @Test
@@ -68,9 +74,16 @@ public class ForumTestSuite {
 
         //Then
         countingStatistics.calculateAdvStatistic();
-        Assert.assertEquals(countingStatistics.getAverageCommentsPerPost(), 25/1000, 0.1);
-        Assert.assertEquals(countingStatistics.getAverageCommentsPerUser(), 5.0, 0.1);
-        Assert.assertEquals(countingStatistics.getAveragePostsPerUser(), 200.0,0.1);
+        int quantityOfUsers = countingStatistics.getUsersCount();
+        int quantityOfPosts = countingStatistics.getPostsCount();
+        int quantityOfComments = countingStatistics.getCommentsCount();
+        Assert.assertEquals(5, quantityOfUsers);
+        Assert.assertEquals(1000, quantityOfPosts);
+        Assert.assertEquals(25, quantityOfComments);
+        countingStatistics.calculateAdvStatistic();
+        Assert.assertEquals(25/1000,countingStatistics.getAverageCommentsPerPost(),  0.1);
+        Assert.assertEquals(5.0,countingStatistics.getAverageCommentsPerUser(),  0.1);
+        Assert.assertEquals(200.0,countingStatistics.getAveragePostsPerUser(), 0.1);
     }
 
     @Test
@@ -91,9 +104,15 @@ public class ForumTestSuite {
 
         //Then
         countingStatistics.calculateAdvStatistic();
-        Assert.assertEquals(countingStatistics.getAverageCommentsPerPost(), 0.0, 0.1);
-        Assert.assertEquals(countingStatistics.getAverageCommentsPerUser(), 0.0, 0.1);
-        Assert.assertEquals(countingStatistics.getAveragePostsPerUser(), 2.0,0.1);
+        int quantityOfUsers = countingStatistics.getUsersCount();
+        int quantityOfPosts = countingStatistics.getPostsCount();
+        int quantityOfComments = countingStatistics.getCommentsCount();
+        Assert.assertEquals(5, quantityOfUsers);
+        Assert.assertEquals(10, quantityOfPosts);
+        Assert.assertEquals(0, quantityOfComments);
+        Assert.assertEquals(0.0, countingStatistics.getAverageCommentsPerPost(), 0.1);
+        Assert.assertEquals(0.0, countingStatistics.getAverageCommentsPerUser(), 0.1);
+        Assert.assertEquals(2.0, countingStatistics.getAveragePostsPerUser(), 0.1);
     }
 
     @Test
@@ -114,9 +133,15 @@ public class ForumTestSuite {
 
         //Then
         countingStatistics.calculateAdvStatistic();
-        Assert.assertEquals(countingStatistics.getAverageCommentsPerPost(), 0.25, 0.1);
-        Assert.assertEquals(countingStatistics.getAverageCommentsPerUser(), 5.0, 0.1);
-        Assert.assertEquals(countingStatistics.getAveragePostsPerUser(), 20.0,0.1);
+        int quantityOfUsers = countingStatistics.getUsersCount();
+        int quantityOfPosts = countingStatistics.getPostsCount();
+        int quantityOfComments = countingStatistics.getCommentsCount();
+        Assert.assertEquals(5, quantityOfUsers);
+        Assert.assertEquals(100, quantityOfPosts);
+        Assert.assertEquals(25, quantityOfComments);
+        Assert.assertEquals(0.25, countingStatistics.getAverageCommentsPerPost(),  0.1);
+        Assert.assertEquals(5.0, countingStatistics.getAverageCommentsPerUser(),  0.1);
+        Assert.assertEquals(20.0, countingStatistics.getAveragePostsPerUser(), 0.1);
     }
 
     @Test
@@ -137,9 +162,15 @@ public class ForumTestSuite {
 
         //Then
         countingStatistics.calculateAdvStatistic();
-        Assert.assertEquals(countingStatistics.getAverageCommentsPerPost(), 2.5, 0.1);
-        Assert.assertEquals(countingStatistics.getAverageCommentsPerUser(), 5.0, 0.1);
-        Assert.assertEquals(countingStatistics.getAveragePostsPerUser(), 2.0,0.1);
+        int quantityOfUsers = countingStatistics.getUsersCount();
+        int quantityOfPosts = countingStatistics.getPostsCount();
+        int quantityOfComments = countingStatistics.getCommentsCount();
+        Assert.assertEquals(5, quantityOfUsers);
+        Assert.assertEquals(10, quantityOfPosts);
+        Assert.assertEquals(25, quantityOfComments);
+        Assert.assertEquals(2.5, countingStatistics.getAverageCommentsPerPost(),  0.1);
+        Assert.assertEquals(5.0, countingStatistics.getAverageCommentsPerUser(),  0.1);
+        Assert.assertEquals(2.0, countingStatistics.getAveragePostsPerUser(), 0.1);
     }
 
     @Test
@@ -160,9 +191,15 @@ public class ForumTestSuite {
 
         //Then
         countingStatistics.calculateAdvStatistic();
-        Assert.assertEquals(countingStatistics.getAverageCommentsPerPost(), 0, 0.1);
-        Assert.assertEquals(countingStatistics.getAverageCommentsPerUser(), 0, 0.1);
-        Assert.assertEquals(countingStatistics.getAveragePostsPerUser(), 0,0.1);
+        int quantityOfUsers = countingStatistics.getUsersCount();
+        int quantityOfPosts = countingStatistics.getPostsCount();
+        int quantityOfComments = countingStatistics.getCommentsCount();
+        Assert.assertEquals(0, quantityOfUsers);
+        Assert.assertEquals(10, quantityOfPosts);
+        Assert.assertEquals(25, quantityOfComments);
+        Assert.assertEquals( 0, countingStatistics.getAverageCommentsPerPost(), 0.1);
+        Assert.assertEquals( 0, countingStatistics.getAverageCommentsPerUser(), 0.1);
+        Assert.assertEquals( 0, countingStatistics.getAveragePostsPerUser(),0.1);
     }
 
     @Test
@@ -183,8 +220,14 @@ public class ForumTestSuite {
 
         //Then
         countingStatistics.calculateAdvStatistic();
-        Assert.assertEquals(countingStatistics.getAverageCommentsPerPost(), 2.5, 0.1);
-        Assert.assertEquals(countingStatistics.getAverageCommentsPerUser(), 0.25, 0.1);
-        Assert.assertEquals(countingStatistics.getAveragePostsPerUser(), 0.1,0.1);
+        int quantityOfUsers = countingStatistics.getUsersCount();
+        int quantityOfPosts = countingStatistics.getPostsCount();
+        int quantityOfComments = countingStatistics.getCommentsCount();
+        Assert.assertEquals(100, quantityOfUsers);
+        Assert.assertEquals(10, quantityOfPosts);
+        Assert.assertEquals(25, quantityOfComments);
+        Assert.assertEquals(2.5, countingStatistics.getAverageCommentsPerPost(),  0.1);
+        Assert.assertEquals(0.25, countingStatistics.getAverageCommentsPerUser(),  0.1);
+        Assert.assertEquals(0.1, countingStatistics.getAveragePostsPerUser(), 0.1);
     }
 }
