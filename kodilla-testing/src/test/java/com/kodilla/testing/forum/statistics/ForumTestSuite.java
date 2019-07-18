@@ -32,19 +32,18 @@ public class ForumTestSuite {
 
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-
         List<String> usersCount = generateTestList(5);
         int postsCount = 0;
         int commentsCount = 0;
-
-        //When
         when(statisticsMock.commentsCount()).thenReturn((commentsCount));
         when(statisticsMock.postCount()).thenReturn(postsCount);
         when(statisticsMock.userNames()).thenReturn(usersCount);
         CountingStatistics countingStatistics = new CountingStatistics(statisticsMock);
 
-        //Then
+        //When
         countingStatistics.calculateAdvStatistic();
+
+        //Then
         int quantityOfUsers = countingStatistics.getUsersCount();
         int quantityOfPosts = countingStatistics.getPostsCount();
         int quantityOfComments = countingStatistics.getCommentsCount();
@@ -61,19 +60,18 @@ public class ForumTestSuite {
 
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-
         List<String> usersCount = generateTestList(5);
         int postsCount = 1000;
         int commentsCount = 25;
-
-        //When
         when(statisticsMock.commentsCount()).thenReturn((commentsCount));
         when(statisticsMock.postCount()).thenReturn(postsCount);
         when(statisticsMock.userNames()).thenReturn(usersCount);
         CountingStatistics countingStatistics = new CountingStatistics(statisticsMock);
 
-        //Then
+        //When
         countingStatistics.calculateAdvStatistic();
+
+        //Then
         int quantityOfUsers = countingStatistics.getUsersCount();
         int quantityOfPosts = countingStatistics.getPostsCount();
         int quantityOfComments = countingStatistics.getCommentsCount();
@@ -91,19 +89,18 @@ public class ForumTestSuite {
 
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-
         List<String> usersCount = generateTestList(5);
         int postsCount = 10;
         int commentsCount = 0;
-
-        //When
         when(statisticsMock.commentsCount()).thenReturn((commentsCount));
         when(statisticsMock.postCount()).thenReturn(postsCount);
         when(statisticsMock.userNames()).thenReturn(usersCount);
         CountingStatistics countingStatistics = new CountingStatistics(statisticsMock);
 
-        //Then
+        //When
         countingStatistics.calculateAdvStatistic();
+
+        //Then
         int quantityOfUsers = countingStatistics.getUsersCount();
         int quantityOfPosts = countingStatistics.getPostsCount();
         int quantityOfComments = countingStatistics.getCommentsCount();
@@ -120,19 +117,18 @@ public class ForumTestSuite {
 
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-
         List<String> usersCount = generateTestList(5);
         int postsCount = 100;
         int commentsCount = 25;
-
-        //When
         when(statisticsMock.commentsCount()).thenReturn((commentsCount));
         when(statisticsMock.postCount()).thenReturn(postsCount);
         when(statisticsMock.userNames()).thenReturn(usersCount);
         CountingStatistics countingStatistics = new CountingStatistics(statisticsMock);
 
-        //Then
+        //When
         countingStatistics.calculateAdvStatistic();
+
+        //Then
         int quantityOfUsers = countingStatistics.getUsersCount();
         int quantityOfPosts = countingStatistics.getPostsCount();
         int quantityOfComments = countingStatistics.getCommentsCount();
@@ -149,19 +145,18 @@ public class ForumTestSuite {
 
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-
         List<String> usersCount = generateTestList(5);
         int postsCount = 10;
         int commentsCount = 25;
-
-        //When
         when(statisticsMock.commentsCount()).thenReturn((commentsCount));
         when(statisticsMock.postCount()).thenReturn(postsCount);
         when(statisticsMock.userNames()).thenReturn(usersCount);
         CountingStatistics countingStatistics = new CountingStatistics(statisticsMock);
 
-        //Then
+        //When
         countingStatistics.calculateAdvStatistic();
+
+        //Then
         int quantityOfUsers = countingStatistics.getUsersCount();
         int quantityOfPosts = countingStatistics.getPostsCount();
         int quantityOfComments = countingStatistics.getCommentsCount();
@@ -182,15 +177,15 @@ public class ForumTestSuite {
         List<String> usersCount = generateTestList(0);
         int postsCount = 10;
         int commentsCount = 25;
-
-        //When
         when(statisticsMock.commentsCount()).thenReturn((commentsCount));
         when(statisticsMock.postCount()).thenReturn(postsCount);
         when(statisticsMock.userNames()).thenReturn(usersCount);
         CountingStatistics countingStatistics = new CountingStatistics(statisticsMock);
 
-        //Then
+        //When
         countingStatistics.calculateAdvStatistic();
+
+        //Then
         int quantityOfUsers = countingStatistics.getUsersCount();
         int quantityOfPosts = countingStatistics.getPostsCount();
         int quantityOfComments = countingStatistics.getCommentsCount();
@@ -207,19 +202,18 @@ public class ForumTestSuite {
 
         //Given
         Statistics statisticsMock = mock(Statistics.class);
-
         List<String> usersCount = generateTestList(100);
         int postsCount = 10;
         int commentsCount = 25;
-
-        //When
         when(statisticsMock.commentsCount()).thenReturn((commentsCount));
         when(statisticsMock.postCount()).thenReturn(postsCount);
         when(statisticsMock.userNames()).thenReturn(usersCount);
         CountingStatistics countingStatistics = new CountingStatistics(statisticsMock);
 
-        //Then
+        //When
         countingStatistics.calculateAdvStatistic();
+
+        //Then
         int quantityOfUsers = countingStatistics.getUsersCount();
         int quantityOfPosts = countingStatistics.getPostsCount();
         int quantityOfComments = countingStatistics.getCommentsCount();
